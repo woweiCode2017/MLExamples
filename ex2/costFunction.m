@@ -21,12 +21,10 @@ grad = zeros(size(theta));
 %
 
 gSigMoidMatrix = sigmoid(X*theta);
-J = sum(-y.*log(gSigMoidMatrix-(1-y).*log(1-gSigMoidMatrix)))/m;
 
-[rDim,cDim] = size(theta);
-for i=1:rDim
-    grad(i,1) = sum((gSigMoidMatrix-y).*X(:,i))/m;
-end
+J = (-y'*log(gSigMoidMatrix)-(1.-y)'*log(1.-gSigMoidMatrix))/m;
+
+grad = 1/m*(X'*(gSigMoidMatrix-y));
 
 
 % =============================================================
